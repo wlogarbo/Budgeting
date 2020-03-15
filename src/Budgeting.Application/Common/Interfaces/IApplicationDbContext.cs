@@ -9,6 +9,8 @@ namespace Budgeting.Application.Common.Interfaces
     {
         DbSet<BudgetItem> BudgetItems { get; set; }
 
+        DbSet<TestItem> TestItems { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

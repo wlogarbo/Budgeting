@@ -1,42 +1,36 @@
-using Budgeting.API.Services;
 using Budgeting.Application;
-using Budgeting.Application.Common.Interfaces;
 using Budgeting.Infrastructure;
 using Budgeting.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace Budgeting.API
+namespace BUdgeting.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
-
-        public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddApplication();
-            services.AddInfrastructure(Configuration, Environment);
+            services.AddInfrastructure(Configuration);
 
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddHttpContextAccessor();
-
-            services.AddHealthChecks()
-                .AddDbContextCheck<ApplicationDbContext>();
+            services.AddDbContext<ApplicationDbContext>(opt =>
+                  opt.UseSqlServer(connectionString));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

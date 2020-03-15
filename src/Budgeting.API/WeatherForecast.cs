@@ -1,6 +1,6 @@
 using System;
 
-namespace Budgeting.API
+namespace BUdgeting.API
 {
     public class WeatherForecast
     {

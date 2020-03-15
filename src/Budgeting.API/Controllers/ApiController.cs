@@ -5,7 +5,7 @@ namespace Budgeting.API.Controllers
 {
     public abstract class ApiController : ControllerBase
     {
-        public IMediator Mediator { get; private set; }
+        internal IMediator Mediator { get; private set; }
         public ApiController(IMediator mediator) => Mediator = mediator;
     }
 }
