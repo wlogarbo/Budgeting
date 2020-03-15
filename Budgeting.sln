@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Budgeting.Infrastructure", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A2E3FB24-D9D2-4791-A808-609BC0385763}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Budgeting.WebUI", "src\Budgeting.WebUI\Budgeting.WebUI.csproj", "{28E06FA6-2F92-4E3B-B06D-DDD3E6700635}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,9 +37,16 @@ Global
 		{89DF43D3-317C-429B-8F5D-CAE8514DA831}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89DF43D3-317C-429B-8F5D-CAE8514DA831}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89DF43D3-317C-429B-8F5D-CAE8514DA831}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E06FA6-2F92-4E3B-B06D-DDD3E6700635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E06FA6-2F92-4E3B-B06D-DDD3E6700635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E06FA6-2F92-4E3B-B06D-DDD3E6700635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E06FA6-2F92-4E3B-B06D-DDD3E6700635}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28E06FA6-2F92-4E3B-B06D-DDD3E6700635} = {A2E3FB24-D9D2-4791-A808-609BC0385763}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D773790-221F-4A0B-8049-72288DA9047B}
