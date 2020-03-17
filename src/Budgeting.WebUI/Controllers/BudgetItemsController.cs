@@ -35,13 +35,24 @@ namespace Budgeting.WebUI.Controllers
         // POST: BudgetItems/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> CreateAsync(IFormCollection collection)
         {
             try
             {
-                // TODO: Add insert logic here
+                var request = new CreateBudgetItemCommand()
+                {
+                    Name = collection["Name"],
+                    Description = collection["Description"],
+                    Amount = decimal.Parse(collection["Amount"].ToString()),
+                    Frequency = collection["Frequency"],
+                    Type = collection["Type"],
+                    StartDate = DateTime.Parse(collection["StartDate"]),
+                    EndDate = DateTime.Parse(collection["EndDate"])
+                };
 
-                return RedirectToAction(nameof(IndexAsync));
+                await Mediator.Send(request);
+
+                return RedirectToAction("Index");
             }
             catch
             {
