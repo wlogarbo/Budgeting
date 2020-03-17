@@ -21,9 +21,23 @@ namespace Budgeting.WebUI.Controllers
         }
 
         // GET: BudgetItems/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> DetailsAsync(int id)
         {
-            return View();
+            try
+            {
+                var request = new GetBudgetItemsQuery()
+                {
+                    Id = id
+                };
+
+                var budgetItem = await Mediator.Send(request);
+
+                return View(budgetItem.FirstOrDefault());
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: BudgetItems/Create
