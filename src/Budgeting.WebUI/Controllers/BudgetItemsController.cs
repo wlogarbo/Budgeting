@@ -61,21 +61,47 @@ namespace Budgeting.WebUI.Controllers
         }
 
         // GET: BudgetItems/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> EditAsync(int id)
         {
-            return View();
+            try
+            {
+                var request = new GetBudgetItemsQuery()
+                {
+                    Id = id
+                };
+
+                var budgetItem = await Mediator.Send(request);
+
+                return View(budgetItem.FirstOrDefault());
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: BudgetItems/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditAsync(int id, IFormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                var request = new UpdateBudgetItemCommand()
+                {
+                    Id = id,
+                    Name = collection["Name"],
+                    Description = collection["Description"],
+                    Amount = decimal.Parse(collection["Amount"].ToString()),
+                    Frequency = collection["Frequency"],
+                    Type = collection["Type"],
+                    StartDate = DateTime.Parse(collection["StartDate"]),
+                    EndDate = DateTime.Parse(collection["EndDate"])
+                };
 
-                return RedirectToAction(nameof(IndexAsync));
+                await Mediator.Send(request);
+
+                return RedirectToAction("Index");
             }
             catch
             {
