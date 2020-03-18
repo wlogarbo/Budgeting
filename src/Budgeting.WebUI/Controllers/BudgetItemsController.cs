@@ -124,21 +124,40 @@ namespace Budgeting.WebUI.Controllers
         }
 
         // GET: BudgetItems/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> DeleteAsync(int id)
         {
-            return View();
+            try
+            {
+                var request = new GetBudgetItemsQuery()
+                {
+                    Id = id
+                };
+
+                var budgetItem = await Mediator.Send(request);
+
+                return View(budgetItem.FirstOrDefault());
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: BudgetItems/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteAsync(int id, IFormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                var request = new DeleteBudgetItemCommand()
+                {
+                    Id = id
+                };
 
-                return RedirectToAction(nameof(IndexAsync));
+                await Mediator.Send(request);
+
+                return RedirectToAction("Index");
             }
             catch
             {
