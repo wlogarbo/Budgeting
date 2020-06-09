@@ -28,7 +28,9 @@ namespace Budgeting.Application.Features.BudgetItems
             }
             public async Task<int> Handle(CreateBudgetItemCommand request, CancellationToken cancellationToken)
             {
-                var entity = new Domain.Entities.BudgetItem()
+                //TODO Move this down to a service.  Should not be creating here.
+
+                var entity = new BudgetItem()
                 {
                     Name = request.Name,
                     Description = request.Description,
@@ -37,12 +39,6 @@ namespace Budgeting.Application.Features.BudgetItems
                     StartDate = request.StartDate,
                     EndDate = request.EndDate,
                     Type = request.Type
-                };
-
-                var ent = new TestItem()
-                {
-                    Name = request.Name,
-                    Description = request.Description
                 };
 
                 _context.BudgetItems.Add(entity);

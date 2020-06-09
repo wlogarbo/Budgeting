@@ -17,8 +17,6 @@ namespace Budgeting.Infrastructure.Persistence
         
         public DbSet<BudgetItem> BudgetItems { get; set; }
 
-        public DbSet<TestItem> TestItems { get; set; }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLoggerFactory(_myLoggerFactory);
